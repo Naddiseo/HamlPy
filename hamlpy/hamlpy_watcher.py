@@ -75,7 +75,7 @@ def watch_folder():
     if args.extension:
         Options.OUTPUT_EXT = args.extension
     
-    if args.tags:
+    if getattr(args, 'tags', False):
         hamlpynodes.TagNode.self_closing.update(args.tags)
     
     if args.input_extension:
