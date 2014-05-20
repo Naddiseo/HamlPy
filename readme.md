@@ -134,6 +134,16 @@ Using the `--jinja` compatibility option adds macro and call tags, and changes t
 
 For HamlPy developers, the `-d` switch can be used with `hamlpy` to debug the internal tree structure.
 	
+### Create message files for translation
+
+There is a very simple solution.
+
+	django-admin.py makemessages --settings=<project.settings> -a
+	
+Where:
+
+  * project.settings -- Django configuration file where  module "hamlpy" is configured properly.
+	
 ## Reference
 
 Check out the [reference.md](http://github.com/jessemiller/HamlPy/blob/master/reference.md "HamlPy Reference") file for a complete reference and more examples.

@@ -156,8 +156,8 @@ class HamlPyTest(unittest.TestCase):
         eq_(html, result)
 
     def test_inline_variables_in_attributes_are_escaped_correctly(self):
-        haml = "%a{'b': '\\\\={greeting} test'} blah"
-        html = "<a b='={greeting} test'>blah</a>\n"
+        haml = "%a{'b': '\\\\={greeting} test', title: \"It can't be removed\"} blah"
+        html = "<a b='={greeting} test' title='It can\\'t be removed'>blah</a>\n"
         hamlParser = hamlpy.Compiler()
         result = hamlParser.process(haml)
         eq_(html, result)
@@ -321,7 +321,8 @@ class HamlPyTest(unittest.TestCase):
 %html{'xmlns':'http://www.w3.org/1999/xhtml', 'xml:lang':'en', 'lang':'en'}
   %body#main
     %div.wrap
-      %a{:href => '/'}"""
+      %a{:href => '/'}
+:javascript"""
         hamlParser = hamlpy.Compiler(options_dict={'attr_wrapper': '"'})
         result = hamlParser.process(haml)
         self.assertEqual(result,
@@ -332,6 +333,10 @@ class HamlPyTest(unittest.TestCase):
     </div>
   </body>
 </html>
+<script type="text/javascript">
+// <![CDATA[
+// ]]>
+</script>
 ''')
 
 if __name__ == '__main__':
